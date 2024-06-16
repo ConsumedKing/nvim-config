@@ -20,6 +20,10 @@ myTerm = "alacritty"      # My terminal of choice
 myBrowser = "firefox" # My browser of choice
 
 keys = [
+        Key([mod], "y",
+             lazy.spawn("sh -c 'xclip -o -selection clipboard | xargs -I {} mpv --ytdl-format=18 \"{}\"'"),
+             desc='Play Youtube Link in mpv'
+             ),
         Key([], "XF86AudioMute",
              lazy.spawn("pamixer -t"),
              desc='Launches My Terminal'
@@ -186,7 +190,7 @@ from libqtile.dgroups import simple_key_binder
 dgroups_key_binder = simple_key_binder("mod4")
 
 layout_theme = {"border_width": 3,
-                "margin": 8,
+                "margin": 2,
                 "border_focus": "018ab7",
                 "border_normal": "1D2330"
                 }
