@@ -20,10 +20,6 @@ myTerm = "alacritty"      # My terminal of choice
 myBrowser = "firefox" # My browser of choice
 
 keys = [
-        Key([mod], "y",
-             lazy.spawn("sh -c 'xclip -o -selection clipboard | xargs -I {} mpv --ytdl-format=18 \"{}\"'"),
-             desc='Play Youtube Link in mpv'
-             ),
         Key([], "XF86AudioMute",
              lazy.spawn("pamixer -t"),
              desc='Launches My Terminal'
@@ -209,29 +205,29 @@ layouts = [
     #layout.Matrix(**layout_theme),
     #layout.Zoomy(**layout_theme),
     layout.MonadTall(**layout_theme),
-    layout.Max(**layout_theme),
-    layout.Stack(num_stacks=2),
-    layout.RatioTile(**layout_theme),
-    layout.TreeTab(
-         font = "Ubuntu",
-         fontsize = 16,
-         sections = ["FIRST", "SECOND", "THIRD", "FOURTH"],
-         section_fontsize = 12,
-         border_width = 2,
-         bg_color = "1c1f24",
-         active_bg = "c678dd",
-         active_fg = "000000",
-         inactive_bg = "a9a1e1",
-         inactive_fg = "1c1f24",
-         padding_left = 0,
-         padding_x = 0,
-         padding_y = 5,
-         section_top = 10,
-         section_bottom = 20,
-         level_shift = 8,
-         vspace = 3,
-         panel_width = 200
-         ),
+#    layout.Max(**layout_theme),
+#    layout.Stack(num_stacks=2),
+#    layout.RatioTile(**layout_theme),
+#    layout.TreeTab(
+#         font = "Ubuntu",
+#         fontsize = 16,
+#         sections = ["FIRST", "SECOND", "THIRD", "FOURTH"],
+#         section_fontsize = 12,
+#         border_width = 2,
+#         bg_color = "1c1f24",
+#         active_bg = "c678dd",
+#         active_fg = "000000",
+#         inactive_bg = "a9a1e1",
+#         inactive_fg = "1c1f24",
+#         padding_left = 0,
+#         padding_x = 0,
+#         padding_y = 5,
+#         section_top = 10,
+#         section_bottom = 20,
+#         level_shift = 8,
+#         vspace = 3,
+#         panel_width = 200
+#         ),
     layout.Floating(**layout_theme)
 ]
 
@@ -259,23 +255,6 @@ extension_defaults = widget_defaults.copy()
 
 def init_widgets_list():
     widgets_list = [
-            #   widget.Sep(
-            #            linewidth = 0,
-            #            padding = 6,
-            #            foreground = colors[2],
-            #            background = colors[0]
-            #            ),
-            #   widget.Image(
-            #            filename = "~/.config/qtile/icons/python-white.png",
-            #            scale = "False",
-            #            mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(myTerm)}
-            #            ),
-            #   widget.Sep(
-            #            linewidth = 0,
-            #            padding = 6,
-            #            foreground = colors[2],
-            #            background = colors[0]
-            #            ),
               widget.GroupBox(
                        font = "Ubuntu Bold",
                        fontsize = 16,
@@ -288,7 +267,9 @@ def init_widgets_list():
                        inactive = "909199",#colors[7],
                        rounded = False,
                        highlight_color = colors[1],
-                       highlight_method = "line",
+                       hide_unused = True,
+                       spacing = 2,
+                       highlight_method = "block",
                        this_current_screen_border = colors[6],
                        this_screen_border = colors [4],
                        other_current_screen_border = colors[6],
@@ -296,70 +277,33 @@ def init_widgets_list():
                        foreground = colors[2],
                        background = colors[0]
                        ),
-             widget.TextBox(
-                       text = '|',
-                       font = "Ubuntu Mono",
-                       background = colors[0],
-                       foreground = '474747',
-                       padding = 2,
-                       fontsize = 16
-                       ),
-              widget.CurrentLayoutIcon(
-                       custom_icon_paths = [os.path.expanduser("~/.config/qtile/icons")],
-                       foreground = colors[2],
-                       background = colors[0],
-                       padding = 0,
-                       scale = 0.7
-                       ),
-              widget.CurrentLayout(
-                       foreground = colors[2],
-                       background = colors[0],
-                       padding = 5
-                       ),
-             widget.TextBox(
-                       text = '|',
-                       font = "Ubuntu Mono",
-                       background = colors[0],
-                       foreground = '474747',
-                       padding = 2,
-                       fontsize = 16
-                       ),
-              widget.WindowName(
-                       foreground = "eff0f7",#colors[6],
-                       background = colors[0],
-                       padding = 0
-                       ),
-              widget.Systray(
-                       background = colors[0],
-                       padding = 5
-                       ),
               widget.Sep(
-                       linewidth = 0,
+                       foreground = colors[0],#colors[4],
+                       background = colors[0],
+                       linewidth = 5,
+                  ),
+              widget.WindowName(
+                       foreground = "eff0f7",#colors[4],
+                       background = colors[0],
+                  ),
+             #`` widget.Spacer(
+             #``          length = bar.STRETCH,
+             #``          padding = 6,
+             #``          foreground = colors[0],
+             #``          background = colors[0]
+             #``          ),
+              widget.Clock(
+                       foreground = "fc160a",#colors[6],
+                       background = colors[0],
+                       format = "%A , %b %d - %I:%M %p ",
+                       padding = 65,
+                       ),
+              widget.Spacer(
+                       length = bar.STRETCH,
                        padding = 6,
                        foreground = colors[0],
                        background = colors[0]
                        ),
-            #  widget.Net(
-            #            interface = "enp6s0",
-            #            format = 'Net: {down} ↓↑ {up}',
-            #            foreground = colors[3],
-            #            background = colors[0],
-            #            padding = 5,
-            #            decorations=[
-            #                BorderDecoration(
-            #                    colour = colors[3],
-            #                    border_width = [0, 0, 2, 0],
-            #                    padding_x = 5,
-            #                    padding_y = None,
-            #                )
-            #            ],
-            #            ),
-            #   widget.Sep(
-            #            linewidth = 0,
-            #            padding = 6,
-            #            foreground = colors[0],
-            #            background = colors[0]
-            #            ),
               widget.CPU(
                        foreground = "eff0f7",#colors[4],
                        background = colors[0],
@@ -367,41 +311,28 @@ def init_widgets_list():
                        fmt = 'CPU: {}',
                        padding = 5,
                        format = "{load_percent:.1f}%"
-                       #decorations=[
-                       #    BorderDecoration(
-                       #        colour = colors[4],
-                       #        border_width = [0, 0, 2, 0],
-                       #        padding_x = 5,
-                       #        padding_y = None,
-                       #    )
-                       #],
                        ),
-              widget.Sep(
-                       linewidth = 0,
-                       padding = 6,
-                       foreground = colors[0],
-                       background = colors[0]
-                       ),
-            widget.Backlight(
+                widget.Backlight(
                        foreground = "eff0f7",#colors[9],
                        background = colors[0],
                        backlight_name = 'intel_backlight',
                        fmt = 'BRIGHT:{}',
                        padding = 5,
-                       #decorations=[
-                       #    BorderDecoration(
-                       #        colour = colors[9],
-                       #        border_width = [0, 0, 2, 0],
-                       #        padding_x = 5,
-                       #        padding_y = None,
-                       #    )
-                       #],
                        ),
                        widget.Battery(
                        foreground = "eff0f7",#colors[6],
                        background = colors[0],
                        format = 'BAT:{percent:2.0%}',
                        padding = 5,
+                       ),
+
+              widget.KeyboardLayout(
+                       foreground = "eff0f7",#colors[8],
+                       background = colors[0],
+                       display_map = {'ara digits' : 'AR', 'us' : 'EN'},
+                       configured_keyboards = ["us", "ara digits"],
+                       fmt = '{}',
+                       padding = 5
                        ),
               widget.Memory(
                        foreground = "eff0f7",#colors[9],
@@ -417,27 +348,15 @@ def init_widgets_list():
                        fmt = 'Vol:{}',
                        padding = 5,
                        ),
-
-
-              widget.KeyboardLayout(
-                       foreground = "eff0f7",#colors[8],
+              widget.Systray(
+                       foreground = "eff0f7",#colors[7],
                        background = colors[0],
-                       display_map = {'ara digits' : 'AR', 'us' : 'EN'},
-                       configured_keyboards = ["us", "ara digits"],
-                       fmt = '{} ',
-                       padding = 5,
-                       ),
-              widget.Clock(
-                       foreground = "fc160a",#colors[6],
-                       background = colors[0],
-                       format = "%a, %b %d - %I:%M %p ",
-                       ),
+                      ),
               ]
     return widgets_list
 
 def init_widgets_screen1():
     widgets_screen1 = init_widgets_list()
-    del widgets_screen1[9:10]               # Slicing removes unwanted widgets (systray) on Monitors 1,3
     return widgets_screen1
 
 def init_widgets_screen2():
@@ -519,11 +438,11 @@ def start_once():
     home = os.path.expanduser('~')
     subprocess.call([home + '/.config/qtile/autostart.sh'])
 
-@hook.subscribe.client_new
-def fix_group(window):
-    group = qtile.current_group
-    if window.group != group:
-        window.togroup(group.name)
+#@hook.subscribe.client_new
+#def fix_group(window):
+#    group = qtile.current_group
+#    if window.group != group:
+#        window.togroup(group.name)
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
 # string besides java UI toolkits; you can see several discussions on the
 # mailing lists, GitHub issues, and other WM documentation that suggest setting
