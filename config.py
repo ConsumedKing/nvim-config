@@ -5,7 +5,6 @@ import socket
 import subprocess
 from libqtile import qtile
 from libqtile.config import Click, Drag, Group, KeyChord, Key, Match, Screen
-#from libqtile.command import lazy
 from libqtile import layout, bar, widget, hook
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
@@ -118,22 +117,30 @@ keys = [
              lazy.layout.up(),
              desc='Move focus up in current stack pane'
              ),
-         Key([mod, "shift"], "j",
+         Key([mod], "h",
+             lazy.layout.left(),
+             desc='Move focus down in current stack pane'
+             ),
+         Key([mod], "l",
+             lazy.layout.right(),
+             desc='Move focus up in current stack pane'
+             ),
+         Key([mod, "shift"], "Down",
              lazy.layout.shuffle_down(),
              lazy.layout.section_down(),
              desc='Move windows down in current stack'
              ),
-         Key([mod, "shift"], "k",
+         Key([mod, "shift"], "Up",
              lazy.layout.shuffle_up(),
              lazy.layout.section_up(),
              desc='Move windows up in current stack'
              ),
-         Key([mod], "h",
+         Key([mod], "Down",
              lazy.layout.shrink(),
              lazy.layout.decrease_nmaster(),
              desc='Shrink window (MonadTall), decrease number in master pane (Tile)'
              ),
-         Key([mod], "l",
+         Key([mod], "Up",
              lazy.layout.grow(),
              lazy.layout.increase_nmaster(),
              desc='Expand window (MonadTall), increase number in master pane (Tile)'
